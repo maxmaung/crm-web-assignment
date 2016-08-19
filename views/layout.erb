@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' type='text/css' href='/style.css'>
+    <meta charset="utf-8">
+    <title>My CRM</title>
+  </head>
+  <body>
+<div class="header">
+    <div class="headercontent">
+        <img src="/images/Logo.png"/>
+    </div>
+</div>
+<div class="nav">
+    <ul>
+              <li><a href="/">Home</a>
+              <li><a href="/contacts">View Contacts</a></li>
+              <li><a href="/contacts/new">Add New Contact</a></li>
+              <li><a href="/contacts/:id/edit">Edit Contact</a></li>
+    </ul>
+</div>
+
+    <%= yield %>
+
+
+  </body>
+</html>

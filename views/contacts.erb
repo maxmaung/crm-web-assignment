@@ -2,7 +2,11 @@
 
 <ul>
   <% Contact.all.each do |contact| %>
-    <li><%= contact.first_name %> <%= contact.last_name %> <%= contact.email %> <%= contact.note %></li>
+    <li>
+      <a href="/contacts/<%=contact.id%>"><%= contact.first_name %></a>
+      <a href="/contacts/<%=contact.id%>"><%= contact.last_name %></a>
+      <a href="/contacts/<%=contact.id%>"><%= contact.email %> </a>
+      <a href="/contacts/<%=contact.id%>"><%= contact.note %></a></li>
 
   <% end %>
 </ul>
