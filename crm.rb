@@ -12,8 +12,6 @@ get '/' do
 end
 
 get '/contacts' do
-
-
   erb :contacts
 end
 
@@ -23,7 +21,12 @@ get '/contacts/new' do
 end
 
 post '/contacts' do
-  Contact.create(params[:first_name], params[:last_name], params[:email], params[:note])
+  contact = Contact.create(
+  first_name: params[:first_name],
+  last_name: params[:last_name],
+  email: params[:email],
+  note: params[:note]
+  )
   redirect to('/contacts')
 end
 
@@ -37,6 +40,8 @@ get '/contacts/:id' do
 end
 
 get '/contacts/:id/edit' do
+
+
   @contact = Contact.find(params[:id].to_i)
   if @contact
     erb :edit_contact
@@ -53,7 +58,7 @@ put '/contacts/:id' do
     @contact.last_name = params[:last_name]
     @contact.email = params[:email]
     @contact.note = params[:note]
-
+    @contact.save
     redirect to('/contacts')
   else
     raise Sinatra::NotFound
@@ -61,11 +66,20 @@ put '/contacts/:id' do
 end
 
 delete '/contacts/:id' do
-  @contact = Contact.find(params[:id].to_i)
-  if @contact
-    @contact.delete
-    redirect to('/contacts')
-  else
-    raise Sinatra::NotFound
-  end
+
+  f = Contact.find(params[:id].to_i)
+  f.destroy
+  redirect to('/contacts')
+
+  # @contact = Contact.find(params[:id].to_i)
+  # if @contact
+  #   @contact.delete
+  #   redirect to('/contacts')
+  # else
+  #   raise Sinatra::NotFound
+  # end
+end
+
+after do
+  ActiveRecord::Base.connection.close
 end
